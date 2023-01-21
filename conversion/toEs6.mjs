@@ -68,6 +68,7 @@ function convertImports(file, txt) {
     const parts = module.split('.');
     const name = parts.pop();
 
+    acc = acc.replace(/goog\.require.*(\.[A-Z][a-zA-Z]+){2,}.*\n/, '');
     acc = convertImport(file, acc, match, parts, name);
     acc = convertReferences(acc, module, name);
 
