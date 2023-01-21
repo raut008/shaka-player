@@ -10,7 +10,8 @@ export async function setup() {
     if (txt.includes('conversion')) {
       return txt;
     }
-    txt + 'conversion/**/*\n';
+
+    return txt + 'conversion/**/*\n';
   });
 
   // copy editor config
