@@ -58,7 +58,7 @@ function convertReferences(txt, module, name) {
     // destructure
     .replace(new RegExp(`.*const ${name} = ${safeModule};\n+`, 'g'), '')
     // object reference
-    .replace(new RegExp(`(?<!@event |'|{|!)${safeModule}\.`, 'g'), `${name}.`);
+    .replace(new RegExp(`(?<!@event |'|{|{!)${safeModule}(\\.|\\))`, 'g'), `${name}$1`);
 }
 
 function convertImports(file, txt) {
@@ -84,6 +84,7 @@ function convertExport(txt) {
 
     acc = acc.replaceAll(match, '');
     acc = acc.replace(new RegExp(`${escapeRegExp(module)}\\s*=\\s* class\\s*`), `export class ${name} `);
+    acc = acc.replace(new RegExp(`${escapeRegExp(module)}\\s*=\\s*{`), `export const ${name} = {`);
     acc = convertReferences(acc, module, name);
 
     return acc;
