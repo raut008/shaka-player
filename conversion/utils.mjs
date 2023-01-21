@@ -1,4 +1,5 @@
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
+import fs from 'node:fs/promises';
 
 export function cmd(cmd, args, options) {
   const opts = Object.assign({
@@ -20,4 +21,9 @@ export function cmd(cmd, args, options) {
       }
     });
   });
+}
+
+export async function rewrite(file, transform) {
+  const txt = await fs.readFile(file, 'utf8');
+  await fs.writeFile(file, await transform(txt));
 }

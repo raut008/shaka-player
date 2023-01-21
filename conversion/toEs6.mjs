@@ -43,7 +43,7 @@ function convertImport(file, txt, match, parts, name) {
   parts.push(fileName);
   const importPath = relative(file, path.join('lib', ...parts));
 
-  return txt.replace(match, `import { ${name} } from '${importPath}'`);
+  return txt.replace(match, `import {${name}} from '${importPath}'`);
 }
 
 function convertReferences(txt, module, name) {
