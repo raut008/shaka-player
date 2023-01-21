@@ -58,7 +58,7 @@ function convertReferences(txt, module, name) {
     // destructure
     .replace(new RegExp(`.*const ${name} = ${safeModule};\n+`, 'g'), '')
     // object reference
-    .replace(new RegExp(`(?<!@event |'|{)${safeModule}\.`, 'g'), `${name}.`);
+    .replace(new RegExp(`(?<!@event |'|{|!)${safeModule}\.`, 'g'), `${name}.`);
 }
 
 function convertImports(file, txt) {
@@ -93,8 +93,8 @@ function convertExport(txt) {
 async function convert(file) {
   let txt = await fs.readFile(file, 'utf8');
 
-  txt = convertImports(file, txt);
   txt = convertExport(txt);
+  txt = convertImports(file, txt);
 
   await fs.writeFile(file, txt);
 }
