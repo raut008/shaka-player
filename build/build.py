@@ -76,6 +76,9 @@ common_closure_opts = [
     '--extra_annotation_name=exportDoc',
     '--extra_annotation_name=exportInterface',
 
+    # Turn off complaints in packages included from node_modules.
+    '--hide_warnings_for=node_modules',
+
     '--conformance_configs',
     ('%s/build/conformance.textproto' %
      shakaBuildHelpers.cygwin_safe_path(shakaBuildHelpers.get_source_base())),

@@ -15,6 +15,7 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
     "@joeyparrish/karma-babel-preprocessor": "^8.2.0",
+    "@svta/common-media-library": "^0.6.2",
     "@teppeis/clutz": "^1.0.29-4c95e12.v20190929",
     "awesomplete": "^1.1.5",
     "babel-plugin-istanbul": "^6.1.1",
@@ -95,6 +96,8 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "build": "python build/all.py",
+    "start": "npx --yes http-server",
     "prepack": "clean-package",
     "postpack": "clean-package restore",
     "prepublishOnly": "python build/checkversion.py && python build/all.py --force"

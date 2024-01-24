@@ -200,6 +200,12 @@ module.exports = (config) => {
       // eslint-disable-next-line max-len
       'node_modules/eme-encryption-scheme-polyfill/dist/eme-encryption-scheme-polyfill.js',
 
+      // Common Media Library, compiled into Shaka Player, but outside
+      // of the Closure deps system, so not in shaka-player.uncompiled.js.
+      // eslint-disable-next-line max-len
+      // {pattern: 'node_modules/@svta/common-media-library/dist/cmcd/encodeCmcd.js'},
+      'node_modules/@svta/common-media-library/dist/cmcd/encodeCmcd.js',
+
       // load closure base, the deps tree, and the uncompiled library
       'node_modules/google-closure-library/closure/goog/base.js',
       'dist/deps.js',

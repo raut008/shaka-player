@@ -48,7 +48,7 @@ def complete_build_files():
   # Normally we don't need to include @core, but because we look at the build
   # object directly, we need to include it here.  When using main(), it will
   # call addCore which will ensure core is included.
-  if not complete.parse_build(['+@complete', '+@core'], os.getcwd()):
+  if not complete.parse_build(['+@complete', '+@core', '-@node'], os.getcwd()):
     logging.error('Error parsing complete build')
     return False
   return complete.include
