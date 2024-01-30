@@ -4,6 +4,7 @@ import { cmd, rewrite } from './utils.mjs';
 export async function setup() {
   // setup
   await cmd('npm i fast-glob -D');
+  await cmd('npm i google-closure-compiler -D');
 
   // ignore the conversion folder
   await rewrite('.eslintignore', txt => {

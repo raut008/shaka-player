@@ -19,6 +19,10 @@ function escapeRegExp(str) {
 }
 
 function convertImport(file, txt, match, parts, name) {
+  if (name === 'asserts') {
+    name = 'assert';
+  }
+
   let fileName = camelToSnake(name[0].toLowerCase() + name.slice(1)) + '.js';
 
   if (parts[0] === 'shaka') {
@@ -58,7 +62,9 @@ function convertReferences(txt, module, name) {
     // destructure
     .replace(new RegExp(`.*const ${name} = ${safeModule};\n+`, 'g'), '')
     // object reference
-    .replace(new RegExp(`(?<!@event |'|{|{!)${safeModule}(\\.|\\))`, 'g'), `${name}$1`);
+    .replace(new RegExp(`(?<!@event |'|{|{!)${safeModule}(\\.|\\))`, 'g'), `${name}$1`)
+    // goog assert
+    .replace(/goog\.asserts\.assert/g, 'assert');
 }
 
 function convertImports(file, txt) {
@@ -101,10 +107,10 @@ async function convert(file) {
   await fs.writeFile(file, txt);
 }
 
-export async function toEs6(name, options) {
+export async function toEs6(pattern, options) {
   const processes = [];
 
-  for await (const file of glob.stream(name, options)) {
+  for await (const file of glob.stream(pattern, options)) {
     const process = convert(file);
     processes.push(process);
   }
